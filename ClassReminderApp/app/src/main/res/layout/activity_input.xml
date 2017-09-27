@@ -86,5 +86,4 @@
         android:layout_marginBottom="55dp"
         android:text="Print Info." />
 
-
 </RelativeLayout>

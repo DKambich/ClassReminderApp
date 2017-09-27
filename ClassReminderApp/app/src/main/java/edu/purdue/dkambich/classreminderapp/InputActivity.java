@@ -8,7 +8,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class InputActivity extends AppCompatActivity {
-
     EditText name, startTime, location;
     Button infobutton;
 
@@ -30,6 +29,5 @@ public class InputActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-
     }
 }
