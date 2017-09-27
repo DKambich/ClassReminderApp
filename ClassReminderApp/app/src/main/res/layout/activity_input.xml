@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.purdue.dkambich.classreminderapp.InputActivity">
+
+    <TextView
+        android:id="@+id/className"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="Class Name"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/classNameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/className"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Enter Name..."
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/classStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classNameInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Start Time"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/classStartTimeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/classNameInput"
+        android:layout_below="@+id/classStartTime"
+        android:layout_marginTop="21dp"
+        android:ems="10"
+        android:hint="Enter Start Time..."
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/classLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="Location"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        android:layout_below="@+id/classStartTimeInput"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/classLocationInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/classStartTimeInput"
+        android:layout_below="@+id/classLocation"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Enter Location..."
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/printInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:text="Print Info." />
+
+
+</RelativeLayout>
