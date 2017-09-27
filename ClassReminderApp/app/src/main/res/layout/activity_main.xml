@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.purdue.dkambich.classreminderapp.MainActivity">
+    tools:context="edu.purdue.dkambich.classreminderapp.Activities.MainActivity">
 
     <Button
         android:id="@+id/tempSwitch"
