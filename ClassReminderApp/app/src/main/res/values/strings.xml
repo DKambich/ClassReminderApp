@@ -1,3 +1,238 @@
 <resources>
     <string name="app_name">ClassReminderApp</string>
+
+    <string name="course_abbr_array">
+        <item>AAE</item> <item>AAS</item> <item>ABE</item>
+        <item>AD</item> <item>AFT</item> <item>AGEC</item>
+        <item>AGR</item> <item>AGRY</item> <item>AMST</item>
+        <item>ANSC</item> <item>ANTH</item> <item>ARAB</item>
+        <item>ASAM</item> <item>ASL</item> <item>ASM</item>
+        <item>ASTR</item> <item>AT</item> <item>BAND</item>
+        <item>BCHM</item> <item>BCM</item> <item>BGR</item>
+        <item>BIOL</item> <item>BME</item> <item>BMS</item>
+        <item>BTNY</item> <item>CDFS</item> <item>CE</item>
+        <item>CEM</item> <item>CFS</item> <item>CGT</item>
+        <item>CHE</item> <item>CHM</item> <item>CHNS</item>
+        <item>CLCS</item> <item>CLPH</item> <item>CMPL</item>
+        <item>CNIT</item> <item>COM</item> <item>CPB</item>
+        <item>CS</item> <item>CSR</item> <item>DANC</item>
+        <item>EAS</item> <item>ECE</item> <item>ECET</item>
+        <item>ECON</item> <item>EDCI</item> <item>EDFA</item>
+        <item>EDPS</item> <item>EDST</item> <item>EEE</item>
+        <item>ENE</item> <item>ENGL</item> <item>ENGR</item>
+        <item>ENTM</item> <item>ENTR</item> <item>EPCS</item>
+        <item>FLL</item> <item>FN</item> <item>FNR</item>
+        <item>FR</item> <item>FS</item> <item>FVS</item>
+        <item>GEOG</item> <item>GEOL</item> <item>GEP</item>
+        <item>GER</item> <item>GREK</item> <item>GS</item>
+        <item>HDFS</item> <item>HEBR</item> <item>HHS</item>
+        <item>HIST</item> <item>HK</item> <item>HONR</item>
+        <item>HORT</item> <item>HPER</item> <item>HSCI</item>
+        <item>HTM</item> <item>IDE</item> <item>IDIS</item>
+        <item>IE</item> <item>IET</item> <item>IPPH</item>
+        <item>IT</item> <item>ITAL</item> <item>JPNS</item>
+        <item>JWST</item> <item>LA</item> <item>LALS</item>
+        <item>LCME</item> <item>LING</item> <item>LS</item>
+        <item>MA</item> <item>MARS</item> <item>MCMP</item>
+        <item>ME</item> <item>MET</item> <item>MGMT</item>
+        <item>MSL</item> <item>MUS</item> <item>NRES</item>
+        <item>NS</item> <item>NUCL</item> <item>NUPH</item>
+        <item>NUR</item> <item>NUTR</item> <item>OBHR</item>
+        <item>OLS</item> <item>PES</item> <item>PHAD</item>
+        <item>PHIL</item> <item>PHPR</item> <item>PHRM</item>
+        <item>PHSL</item> <item>PHYS</item> <item>POL</item>
+        <item>PPE</item> <item>PPT</item> <item>PSY</item>
+        <item>PTGS</item> <item>RECR</item> <item>REL</item>
+        <item>RUSS</item> <item>SA</item> <item>SCI</item>
+        <item>SLHS</item> <item>SOC</item> <item>SPAN</item>
+        <item>STAR</item> <item>STAT</item> <item>SWRK</item>
+        <item>TECH</item> <item>THTR</item> <item>USP</item>
+        <item>VCD</item> <item>VCS</item> <item>VM</item>
+        <item>WOST</item> <item>YDAE</item>
+    </string>
+    <!--Add in 2nd col of class abbreviations
+    https://www.purdue.edu/catalogs/management/abbreviations.html-->
+    <string-array name="building_abbr_array">
+        <item>ABE</item>
+        <item>ADDL</item>
+        <item>ADM</item>
+        <item>AERO</item>
+        <item>AGAD</item>
+        <item>AHF</item>
+        <item>AQUA</item>
+        <item>AR</item>
+        <item>ARMS</item>
+        <item>ASB</item>
+        <item>ASTL</item>
+        <item>BALY</item>
+        <item>BCC</item>
+        <item>BCHM</item>
+        <item>BIND</item>
+        <item>BRES</item>
+        <item>BRK</item>
+        <item>BRNG</item>
+        <item>BRWN</item>
+        <item>BTV</item>
+        <item>CHAF</item>
+        <item>CL50</item>
+        <item>CREC</item>
+        <item>DANL</item>
+        <item>DAUC</item>
+        <item>DLR</item>
+        <item>DMNT</item>
+        <item>DOYL</item>
+        <item>DRUG</item>
+        <item>DYE</item>
+        <item>EE</item>
+        <item>EEL</item>
+        <item>EHSA</item>
+        <item>EHSB</item>
+        <item>ELLT</item>
+        <item>EXPT</item>
+        <item>EXPT</item>
+        <item>FOPN</item>
+        <item>FORS</item>
+        <item>FPRD</item>
+        <item>FREH</item>
+        <item>FRNY</item>
+        <item>FWLR</item>
+        <item>GCMB</item>
+        <item>GMF</item>
+        <item>GRIS</item>
+        <item>GRS</item>
+        <item>GSMB</item>
+        <item>HAAS</item>
+        <item>HAMP</item>
+        <item>HANS</item>
+        <item>HEAV</item>
+        <item>HERL</item>
+        <item>HGR4-6</item>
+        <item>HGRH</item>
+        <item>HIKS</item>
+        <item>HLAB</item>
+        <item>HMMT</item>
+        <item>HNLY</item>
+        <item>HOCK</item>
+        <item>HORT</item>
+        <item>HOVD</item>
+        <item>JNSN</item>
+        <item>KCTR</item>
+        <item>KNOY</item>
+        <item>KRAN</item>
+        <item>KRCH</item>
+        <item>LAMB</item>
+        <item>LCC</item>
+        <item>LILY</item>
+        <item>LMSB</item>
+        <item>LMST</item>
+        <item>LSA</item>
+        <item>LSPS</item>
+        <item>LSR</item>
+        <item>LWSN</item>
+        <item>LYLE</item>
+        <item>LYNN</item>
+        <item>MACK</item>
+        <item>MANN</item>
+        <item>MATH</item>
+        <item>ME</item>
+        <item>MGL</item>
+        <item>MUIS</item>
+        <item>MMDC</item>
+        <item>MMS1</item>
+        <item>MOLL</item>
+        <item>MRGN</item>
+        <item>MRRT</item>
+        <item>MSEE</item>
+        <item>MTHW</item>
+        <item>NAECC</item>
+        <item>NISW</item>
+        <item>NLSN</item>
+        <item>NUCL</item>
+        <item>OLMN</item>
+        <item>PAO</item>
+        <item>PFEN</item>
+        <item>PFSB</item>
+        <item>PHYS</item>
+        <item>PJIS</item>
+        <item>PMU</item>
+        <item>PMUC</item>
+        <item>POAN</item>
+        <item>POTR</item>
+        <item>POUL</item>
+        <item>PRCE</item>
+        <item>PRSV</item>
+        <item>PSYC</item>
+        <item>PUSH</item>
+        <item>PVAB</item>
+        <item>PVCC</item>
+        <item>PWD</item>
+        <item>RAIL</item>
+        <item>RAWL</item>
+        <item>REC</item>
+        <item>RHPH</item>
+        <item>SC</item>
+        <item>SCCA-E</item>
+        <item>SCHL</item>
+        <item>SCHO</item>
+        <item>SCPA</item>
+        <item>SIML</item>
+        <item>SMLY</item>
+        <item>SMTH</item>
+        <item>SOIL</item>
+        <item>SPUR</item>
+        <item>SSOF</item>
+        <item>STDM</item>
+        <item>STEW</item>
+        <item>STON</item>
+        <item>TRL</item>
+        <item>TERM</item>
+        <item>TERY</item>
+        <item>TH1-6</item>
+        <item>TREC</item>
+        <item>TSWF</item>
+        <item>UNIV</item>
+        <item>UPOB</item>
+        <item>UPOF</item>
+        <item>UPSB</item>
+        <item>VA1</item>
+        <item>VA2</item>
+        <item>VCPR</item>
+        <item>VLAB</item>
+        <item>VMIF</item>
+        <item>VOIN</item>
+        <item>VPRB</item>
+        <item>VPTH</item>
+        <item>WADE</item>
+        <item>WANG</item>
+        <item>WEST</item>
+        <item>WGLR</item>
+        <item>WSLR</item>
+        <item>WTHR</item>
+        <item>YONG</item>
+        <item>CARY</item>
+        <item>DUHM</item>
+        <item>ERHT</item>
+        <item>FST</item>
+        <item>HARR</item>
+        <item>HAWK</item>
+        <item>HCRN</item>
+        <item>HCRS</item>
+        <item>HILL</item>
+        <item>HLTP</item>
+        <item>MCUT</item>
+        <item>MRDH</item>
+        <item>OWEN</item>
+        <item>PVIL</item>
+        <item>PVP</item>
+        <item>SHLY</item>
+        <item>SHRV</item>
+        <item>TARK</item>
+        <item>TSS</item>
+        <item>VAWT</item>
+        <item>WALC</item>
+        <item>WARN</item>
+        <item>WDCT</item>
+        <item>WILY</item>
+        <item>WOOD</item>
+    </string-array>
 </resources>

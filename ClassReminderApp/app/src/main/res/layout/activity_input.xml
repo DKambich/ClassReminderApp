@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Identifier-#####"
+        android:hint="ID-#####"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
         android:layout_below="@+id/className"
@@ -69,12 +69,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp" />
 
-    <EditText
-        android:id="@+id/classLocationInput"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Building-Room#"
+        android:hint="Building Abbreviation"
         android:inputType="textPersonName"
         android:textColor="@android:color/black"
         android:layout_below="@+id/classLocation"
@@ -88,9 +88,8 @@
         android:layout_height="wrap_content"
         android:text="Enter"
         android:layout_marginTop="29dp"
-        android:layout_below="@+id/classLocationInput"
+        android:layout_below="@+id/autoCompleteLocation"
         android:layout_centerHorizontal="true" />
-
 
 
 </RelativeLayout>

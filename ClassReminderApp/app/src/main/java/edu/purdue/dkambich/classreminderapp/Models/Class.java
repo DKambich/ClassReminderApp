@@ -37,4 +37,13 @@ public class Class {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
+
+    public int getStartHour(){
+        return Integer.parseInt(startTime.substring(0, startTime.indexOf(":"))) + (startTime.contains("PM") ? 12 : 0);
+    }
+
+    public int getStartMinute(){
+        return Integer.parseInt(startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" ")));
+    }
+
 }

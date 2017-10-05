@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#BAA892</color>
     <color name="purdue_gold">#C28E0E</color>
-
+    <color name="purdue_black">#000000</color>
+    <color name="purdue_gold_dark">#98700D</color>
+    <color name="purdue_light_tan">#BFB48F</color>
+    <color name="purdue_white">#EAEAEA</color>
 </resources>
