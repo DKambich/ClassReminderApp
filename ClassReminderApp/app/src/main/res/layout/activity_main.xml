@@ -14,6 +14,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="212dp"
         android:elevation="0dp"
-        android:text="Switch to Input Screen" />
+        android:text="To Course Screen" />
 
 </RelativeLayout>

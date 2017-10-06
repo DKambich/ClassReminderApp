@@ -4,11 +4,11 @@ package edu.purdue.dkambich.classreminderapp.Models;
  * Created by Daniel on 9/26/2017.
  */
 
-public class Class {
+public class Course {
 
     private String name, location, startTime;
 
-    public Class(String name, String location, String startTime) {
+    public Course(String name, String location, String startTime) {
         this.name = name;
         this.location = location;
         this.startTime = startTime;

@@ -1,7 +1,9 @@
 package edu.purdue.dkambich.classreminderapp.Activities;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,30 +22,36 @@ import java.util.Calendar;
 import edu.purdue.dkambich.classreminderapp.R;
 
 public class InputActivity extends AppCompatActivity {
-    EditText name;
+
     AutoCompleteTextView location;
-    Button inputButton;
+    FloatingActionButton inputButton;
+    EditText name;
     TextView startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+        //
 
+
+        //Get course name for later references
         name = (EditText) findViewById(R.id.classNameInput);
 
+        //Get location to add in buildings array and for later references
         location = (AutoCompleteTextView) findViewById(R.id.autoCompleteLocation);
         final String[] buildings = getResources().getStringArray(R.array.building_abbr_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, buildings);
         location.setAdapter(adapter);
 
+        //Get start time to add on a TimePickerDialog and later references
         startTime = (TextView) findViewById(R.id.startTimeDisplay);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
+                Calendar currentTime = Calendar.getInstance();
+                int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = currentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(InputActivity.this, R.style.DialogTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
@@ -62,31 +70,47 @@ public class InputActivity extends AppCompatActivity {
 
 
                     }
-                }, hour, minute, false);//Yes 24 hour time
+                }, hour, minute, false);
                 //mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
             }
         });
 
-        inputButton = (Button) findViewById(R.id.inputButton);
+        //Get input button and apply submit logic
+        inputButton = (FloatingActionButton) findViewById(R.id.confirmCourse);
         inputButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean error = true;
-                for(String building: buildings){
-                    if(building.equals(location.getText().toString())){
-                        error = false;
+                @Override
+                public void onClick(View view) {
+
+                    //Check for proper time
+                    if(startTime.getText().toString().equals("HH:MM")) {
+                        String message = "Please enter a valid start time";
+                        Toast toast =Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
                     }
-                }
-                String message;
-                if(error){
-                    message = "Error Entering Location";
-                }
-                else{
-                    message = "Class Entered Successfully";
-                }
-                Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
-                toast.show();
+
+                    //Check for proper location
+                    boolean error = true;
+                    for(String building: buildings){
+                        if(building.equals(location.getText().toString())){
+                            error = false;
+                        }
+                    }
+                    if(error){
+                        String message = "Please enter a valid location";
+                        Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+                    //Create a course and add it to the CourseList
+
+
+
+                    //
+                    //Switch to CourseListActivity
+                    Intent myIntent = new Intent(InputActivity.this, CourseListActivity.class);
+                    startActivity(myIntent);
             }
         });
     }

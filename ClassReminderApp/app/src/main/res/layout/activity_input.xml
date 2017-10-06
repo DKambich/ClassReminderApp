@@ -10,7 +10,7 @@
         android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Class Name"
+        android:text="Course Name"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30sp"
@@ -82,14 +82,20 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp" />
 
-    <Button
-        android:id="@+id/inputButton"
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/confirmCourse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter"
-        android:layout_marginTop="29dp"
-        android:layout_below="@+id/autoCompleteLocation"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginRight="32dp"
+        android:clickable="true"
+        android:elevation="4dp"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/fab_check" />
 
 
 </RelativeLayout>

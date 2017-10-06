@@ -17,13 +17,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         switchButton = (Button) findViewById(R.id.tempSwitch);
 
         switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(MainActivity.this, InputActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, CourseListActivity.class);
                 startActivity(myIntent);
             }
         });

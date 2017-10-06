@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#BAA892</color>
-    <color name="purdue_gold">#C28E0E</color>
-    <color name="purdue_black">#000000</color>
-    <color name="purdue_gold_dark">#98700D</color>
-    <color name="purdue_light_tan">#BFB48F</color>
-    <color name="purdue_white">#EAEAEA</color>
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
+
 </resources>
