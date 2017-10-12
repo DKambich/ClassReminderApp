@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/inputLayout"
     tools:context="edu.purdue.dkambich.classreminderapp.Activities.InputActivity">
 
     <TextView
@@ -15,11 +16,11 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp" />
+        android:layout_centerHorizontal="true" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/classNameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
         android:textColor="@android:color/black"
         android:layout_below="@+id/className"
         android:layout_centerHorizontal="true"
+        android:imeOptions="actionDone"
         android:layout_marginTop="15dp" />
 
     <TextView
@@ -43,8 +45,8 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_above="@+id/startTimeDisplay" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/autoCompleteLocation" />
 
     <TextView
         android:id="@+id/startTimeDisplay"
@@ -52,9 +54,10 @@
         android:layout_height="wrap_content"
         android:text="HH:MM"
         android:textAlignment="center"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/classStartTime"
         android:textColor="@android:color/black"
         android:textSize="40sp"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -65,9 +68,9 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_below="@+id/startTimeDisplay"
+        android:layout_below="@+id/classNameInput"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="20dp" />
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteLocation"
@@ -80,6 +83,7 @@
         android:layout_below="@+id/classLocation"
         android:layout_alignStart="@+id/classNameInput"
         android:layout_centerHorizontal="true"
+        android:imeOptions="actionDone"
         android:layout_marginTop="15dp" />
 
 
@@ -95,7 +99,81 @@
         android:elevation="4dp"
         app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
-        app:srcCompat="@drawable/fab_check" />
+        app:srcCompat="@drawable/fab_check"
+        />
+
+    <!--Days of the week-->
+
+    <TextView
+        android:id="@+id/wednesdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WED"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/white_circle_drawable"
+        android:textSize="13sp"
+        android:layout_below="@id/startTimeDisplay"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="selectDay"/>
+
+    <TextView
+        android:id="@+id/tuesdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TUE"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/white_circle_drawable"
+        android:textSize="13sp"
+        android:layout_alignTop="@id/wednesdayButton"
+        android:layout_toLeftOf="@id/wednesdayButton"
+        android:layout_marginRight="10sp"
+        android:onClick="selectDay"/>
+
+    <TextView
+        android:id="@+id/mondayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MON"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/white_circle_drawable"
+        android:textSize="13sp"
+        android:layout_alignTop="@id/tuesdayButton"
+        android:layout_toLeftOf="@id/tuesdayButton"
+        android:layout_marginRight="10sp"
+        android:onClick="selectDay"/>
+
+    <TextView
+        android:id="@+id/thursdayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THU"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/white_circle_drawable"
+        android:textSize="13sp"
+        android:layout_alignTop="@id/wednesdayButton"
+        android:layout_toRightOf="@id/wednesdayButton"
+        android:layout_marginLeft="10sp"
+        android:onClick="selectDay"/>
+
+    <TextView
+        android:id="@+id/fridayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FRI"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:background="@drawable/white_circle_drawable"
+        android:textSize="13sp"
+        android:layout_alignTop="@id/thursdayButton"
+        android:layout_toRightOf="@id/thursdayButton"
+        android:layout_marginLeft="10sp"
+        android:onClick="selectDay"/>
+
 
 
 </RelativeLayout>

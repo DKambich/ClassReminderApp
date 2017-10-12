@@ -1,12 +1,20 @@
 package edu.purdue.dkambich.classreminderapp.Models;
 
+import java.util.HashMap;
+
+import io.realm.RealmObject;
+
 /**
  * Created by Daniel on 9/26/2017.
  */
 
-public class Course {
+public class Course extends RealmObject {
 
     private String name, location, startTime;
+
+    public Course(){
+
+    }
 
     public Course(String name, String location, String startTime) {
         this.name = name;

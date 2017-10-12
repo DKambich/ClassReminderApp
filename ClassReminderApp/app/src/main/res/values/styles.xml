@@ -6,12 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-    </style>
-    <!--<item name="textColorPrimary">@color/textColorPrimary</item>
-        <item name="textColorSecondary">@color/textColorSecondary</item>
         <item name="android:icon">@color/icons</item>
-        <item name="android:divider">@color/divider</item>-->
+        <item name="android:divider">@color/divider</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+    </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>

@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.InputActivity" android:label="Input a Course" android:parentActivityName=".Activities.CourseListActivity"/>
-        <activity android:name=".Activities.CourseListActivity" android:label="Course List"></activity>
+        <activity android:name=".Activities.CourseListActivity" android:label="Course List" > </activity>
     </application>
 
 </manifest>

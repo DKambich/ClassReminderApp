@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ClassReminderApp</string>
 
-    <string name="course_abbr_array">
+    <string-array name="course_abbr_array">
         <item>AAE</item> <item>AAS</item> <item>ABE</item>
         <item>AD</item> <item>AFT</item> <item>AGEC</item>
         <item>AGR</item> <item>AGRY</item> <item>AMST</item>
@@ -49,7 +49,7 @@
         <item>TECH</item> <item>THTR</item> <item>USP</item>
         <item>VCD</item> <item>VCS</item> <item>VM</item>
         <item>WOST</item> <item>YDAE</item>
-    </string>
+    </string-array>
     <!--Add in 2nd col of class abbreviations
     https://www.purdue.edu/catalogs/management/abbreviations.html-->
     <string-array name="building_abbr_array">
@@ -187,7 +187,6 @@
         <item>TRL</item>
         <item>TERM</item>
         <item>TERY</item>
-        <item>TH1-6</item>
         <item>TREC</item>
         <item>TSWF</item>
         <item>UNIV</item>

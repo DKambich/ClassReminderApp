@@ -21,6 +21,42 @@
         app:fabSize="normal"
         app:srcCompat="@drawable/fab_plus" />
 
-   
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:id="@android:id/list"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bar" />
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course List"
+                android:textAllCaps="false"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
 
 </RelativeLayout>
