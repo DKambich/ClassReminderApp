@@ -73,6 +73,7 @@ public class CourseListActivity extends ListActivity {
         if (extras != null) {
             jsonMyObject = extras.getString("course");
         }
+
         Course myCourse = new Gson().fromJson(jsonMyObject, Course.class);
         listValues.add(myCourse);
         realm.beginTransaction();
