@@ -4,36 +4,26 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Handler;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.DragEvent;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.purdue.dkambich.classreminderapp.Models.Course;
@@ -41,20 +31,23 @@ import edu.purdue.dkambich.classreminderapp.R;
 
 public class InputActivity extends AppCompatActivity {
 
-    AutoCompleteTextView name, location;
-    FloatingActionButton inputButton;
-    TextView startTime;
-    private final int RESULT_OK = 0;
+    //View Variables
+    private AutoCompleteTextView name, location;
+    private FloatingActionButton inputButton;
+    private RelativeLayout inputLayout;
+    private TextView startTime;
+
+    //Realm Variables
+    private final int RESULT_OK = 0, RESULT_RETURN = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 
-
-
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.inputLayout);
-        layout.setOnClickListener(new View.OnClickListener() {
+        //Set click listener on the activity
+        inputLayout = (RelativeLayout) findViewById(R.id.inputLayout);
+        inputLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -62,8 +55,8 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        //Get course name for later references
-        name = (AutoCompleteTextView) findViewById(R.id.classNameInput);
+        //Set keyboard input type for name input
+        name = (AutoCompleteTextView) findViewById(R.id.courseInputView);
         name.setInputType(InputType.TYPE_CLASS_TEXT);
 
         ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.course_abbr_array));
@@ -103,7 +96,7 @@ public class InputActivity extends AppCompatActivity {
         });
 
         //Get location to add in buildings array and for later references
-        location = (AutoCompleteTextView) findViewById(R.id.autoCompleteLocation);
+        location = (AutoCompleteTextView) findViewById(R.id.locationInputView);
         ArrayAdapter<String> locAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.building_abbr_array));
         location.setAdapter(locAdapter);
         location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -119,7 +112,7 @@ public class InputActivity extends AppCompatActivity {
         });
 
         //Get start time to add on a TimePickerDialog and later references
-        startTime = (TextView) findViewById(R.id.startTimeDisplay);
+        startTime = (TextView) findViewById(R.id.startTimeInputView);
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,7 +144,7 @@ public class InputActivity extends AppCompatActivity {
         });
 
         //Get input button and apply submit logic
-        inputButton = (FloatingActionButton) findViewById(R.id.confirmCourse);
+        inputButton = (FloatingActionButton) findViewById(R.id.confirmCourseFAB);
         inputButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -201,8 +194,17 @@ public class InputActivity extends AppCompatActivity {
                         return;
                     }*/
                     //Create a course and add it to the CourseList
-
+                    int[] ID = {R.id.toggleMonday, R.id.toggleTuesday, R.id.toggleWednesday, R.id.toggleThursday, R.id.toggleFriday };
                     Course newCourse = new Course(name.getText().toString(), location.getText().toString(), startTime.getText().toString());
+                    String days = "";
+                    for(int viewID: ID){
+                        TextView day = (TextView) findViewById(viewID);
+                        if(day.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
+                            days += day.getText().toString();
+                        }
+                    }
+                    newCourse.setDaysOfWeek(days);
+
 
 
                     //
@@ -211,16 +213,6 @@ public class InputActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
                     toast.show();
 
-                    //Switch to CourseListActivity
-                    /*
-                    Intent activity = new Intent();
-                    String courseStringObject = "";
-                    Bundle extras = activity.getExtras();
-                    if(extras != null) {
-                        courseStringObject = extras.getString("course");
-                    }
-                    Course course = new Gson().fromJson(courseStringObject, Course.class);
-                    */
 
                     Intent activity = new Intent();
                     activity.putExtra("course", new Gson().toJson(newCourse));
@@ -230,7 +222,7 @@ public class InputActivity extends AppCompatActivity {
         });
     }
 
-    public void selectDay(View v){
+    public void toggleDay(View v){
         TextView clickable = (TextView) v;
         if(clickable.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
             clickable.setBackground(getDrawable(R.drawable.white_circle_drawable));
@@ -242,5 +234,21 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                setResult(RESULT_RETURN);
+                finish();
+                break;
+        }
+        return true;
+    }
 
+    @Override
+    public void onBackPressed() {
+        setResult(RESULT_RETURN);
+        finish();
+        super.onBackPressed();
+    }
 }

@@ -6,15 +6,26 @@
     android:layout_height="match_parent"
     tools:context="edu.purdue.dkambich.classreminderapp.Activities.MainActivity">
 
-    <Button
-        android:id="@+id/tempSwitch"
+    <fragment
+        android:name="edu.purdue.dkambich.classreminderapp.Fragments.MapFragment"
+        android:id="@+id/mapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        tools:layout="@layout/fragment_map" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/targetLocationFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="212dp"
-        android:elevation="0dp"
-        android:text="To Course Screen" />
-
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="4dp"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/fab_target" />
 
 </RelativeLayout>

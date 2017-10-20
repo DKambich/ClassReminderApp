@@ -1,7 +1,5 @@
 package edu.purdue.dkambich.classreminderapp.Models;
 
-import java.util.HashMap;
-
 import io.realm.RealmObject;
 
 /**
@@ -10,10 +8,13 @@ import io.realm.RealmObject;
 
 public class Course extends RealmObject {
 
-    private String name, location, startTime;
+    private String name, location, startTime, daysOfWeek;
 
     public Course(){
-
+        this.name = "";
+        this.location = "";
+        this.startTime = "";
+        this.daysOfWeek = "";
     }
 
     public Course(String name, String location, String startTime) {
@@ -44,6 +45,14 @@ public class Course extends RealmObject {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public String getDaysOfWeek(){
+        return daysOfWeek;
+    }
+
+    public void setDaysOfWeek(String daysOfWeek){
+        this.daysOfWeek = daysOfWeek;
     }
 
     public int getStartHour(){

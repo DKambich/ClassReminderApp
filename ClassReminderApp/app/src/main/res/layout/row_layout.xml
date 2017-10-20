@@ -9,89 +9,90 @@
     <!--Name of the class-->
 
     <TextView
-        android:id="@+id/courseNameView"
+        android:id="@+id/rowCourseView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:paddingLeft="10sp"
-        android:text="TextView"
-        android:textSize="40dp"
+        android:paddingStart="10dp"
+        android:text="@string/dummyTextView"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <!--Location of the class-->
 
     <TextView
-        android:id="@+id/courseLocationView"
+        android:id="@+id/rowLocationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="TextView"
-        android:paddingRight="30sp"
-        android:layout_above="@+id/courseTimeView"
-        android:layout_alignParentEnd="true" />
+        android:layout_above="@+id/rowStartTimeView"
+        android:layout_alignParentEnd="true"
+        android:paddingEnd="30dp"
+        android:text="@string/dummyTextView"
+        android:textSize="20sp" />
 
     <!--Start time of the class-->
 
     <TextView
-        android:id="@+id/courseTimeView"
+        android:id="@+id/rowStartTimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="TextView"
-        android:paddingRight="30sp"
-        android:layout_alignBottom="@+id/courseNameView"
+        android:layout_alignBottom="@+id/rowCourseView"
         android:layout_alignParentEnd="true"
-        />
+        android:paddingEnd="30dp"
+        android:text="@string/dummyTextView"
+        android:textSize="20sp" />
 
     <!--Days of the week-->
 
     <TextView
-        android:id="@+id/wednesday"
+        android:id="@+id/rowWednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WED"
-        android:layout_below="@+id/courseNameView"
+        android:layout_below="@+id/rowCourseView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="@string/wednesday" />
 
     <TextView
-        android:id="@+id/tuesday"
+        android:id="@+id/rowTuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/wednesday"
-        android:layout_toLeftOf="@id/wednesday"
-        android:layout_marginRight="10sp"
-        android:text="TUE" />
+        android:layout_alignBottom="@id/rowWednesday"
+        android:layout_toStartOf="@id/rowWednesday"
+        android:layout_marginEnd="10sp"
+        android:gravity="center"
+        android:text="@string/tuesday" />
 
     <TextView
-        android:id="@+id/monday"
+        android:id="@+id/rowMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/wednesday"
-        android:layout_toLeftOf="@id/tuesday"
-        android:layout_marginRight="10sp"
-        android:text="MON" />
+        android:layout_alignBottom="@id/rowWednesday"
+        android:layout_toStartOf="@id/rowTuesday"
+        android:layout_marginEnd="10sp"
+        android:gravity="center"
+        android:text="@string/monday" />
 
     <TextView
-        android:id="@+id/thursday"
+        android:id="@+id/rowThursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/wednesday"
-        android:layout_toRightOf="@id/wednesday"
-        android:layout_marginLeft="10sp"
-        android:text="THU" />
+        android:layout_alignBottom="@+id/rowWednesday"
+        android:layout_toEndOf="@id/rowWednesday"
+        android:layout_marginStart="10sp"
+        android:gravity="center"
+        android:text="@string/thursday" />
 
     <TextView
-        android:id="@+id/friday"
+        android:id="@+id/rowFriday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/wednesday"
-        android:layout_marginLeft="10sp"
-        android:layout_toRightOf="@id/thursday"
-        android:text="FRI " />
-
-
-
+        android:layout_alignBottom="@id/rowWednesday"
+        android:layout_toEndOf="@id/rowThursday"
+        android:layout_marginStart="10sp"
+        android:gravity="center"
+        android:text="@string/friday" />
 
 </RelativeLayout>

@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import edu.purdue.dkambich.classreminderapp.Activities.CourseListActivity;
 import edu.purdue.dkambich.classreminderapp.Models.Course;
 import edu.purdue.dkambich.classreminderapp.R;
 
@@ -34,33 +33,36 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_layout, parent, false);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.courseNameView);
-        TextView location = (TextView) convertView.findViewById(R.id.courseLocationView);
-        TextView time = (TextView) convertView.findViewById(R.id.courseTimeView);
+        TextView name = (TextView) convertView.findViewById(R.id.rowCourseView);
+        TextView location = (TextView) convertView.findViewById(R.id.rowLocationView);
+        TextView time = (TextView) convertView.findViewById(R.id.rowStartTimeView);
         name.setText(course.getName());
         location.setText(course.getLocation());
         time.setText(course.getStartTime());
 
         if(name.getText().toString().equals("") || location.getText().toString().equals("") || time.getText().toString().equals("")){
-            ((TextView) convertView.findViewById(R.id.monday)).setText("");
-            ((TextView) convertView.findViewById(R.id.tuesday)).setText("");
-            ((TextView) convertView.findViewById(R.id.wednesday)).setText("");
-            ((TextView) convertView.findViewById(R.id.thursday)).setText("");
-            ((TextView) convertView.findViewById(R.id.friday)).setText("");
+            ((TextView) convertView.findViewById(R.id.rowMonday)).setText("");
+            ((TextView) convertView.findViewById(R.id.rowTuesday)).setText("");
+            ((TextView) convertView.findViewById(R.id.rowWednesday)).setText("");
+            ((TextView) convertView.findViewById(R.id.rowThursday)).setText("");
+            ((TextView) convertView.findViewById(R.id.rowFriday)).setText("");
 
         }
         else {
-            ((TextView) convertView.findViewById(R.id.monday)).setText("MON");
-            ((TextView) convertView.findViewById(R.id.tuesday)).setText("TUE");
-            ((TextView) convertView.findViewById(R.id.wednesday)).setText("WED");
-            ((TextView) convertView.findViewById(R.id.thursday)).setText("THU");
-            ((TextView) convertView.findViewById(R.id.friday)).setText("FRI");
+            int[] ID = {R.id.rowMonday, R.id.rowTuesday, R.id.rowWednesday, R.id.rowThursday, R.id.rowFriday };
+            for(int viewID: ID) {
+                TextView currentView = (TextView) convertView.findViewById(viewID);
+                currentView.setText(currentView.getText().toString());
+                if(course.getDaysOfWeek().contains(currentView.getText().toString())) {
+                    currentView.setBackground(getContext().getDrawable(R.drawable.gold_circle_drawable));
+                    currentView.setTextColor(Color.parseColor("#FAFAFA"));
+                }
+                else {
+                    currentView.setBackground(getContext().getDrawable(R.drawable.white_circle_drawable));
+                }
+            }
         }
-
-
         return convertView;
     }
-
-
 
 }

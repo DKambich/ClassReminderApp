@@ -8,172 +8,165 @@
     tools:context="edu.purdue.dkambich.classreminderapp.Activities.InputActivity">
 
     <TextView
-        android:id="@+id/className"
+        android:id="@+id/courseView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Course Name"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/courseText"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <AutoCompleteTextView
-        android:id="@+id/classNameInput"
+        android:id="@+id/courseInputView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="ID-#####"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/className"
+        android:layout_below="@+id/courseView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
         android:imeOptions="actionDone"
-        android:layout_marginTop="15dp" />
+        android:hint="@string/courseText"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/classStartTime"
+        android:id="@+id/locationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Time"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
+        android:layout_below="@+id/courseInputView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/autoCompleteLocation" />
-
-    <TextView
-        android:id="@+id/startTimeDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HH:MM"
-        android:textAlignment="center"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/classStartTime"
-        android:textColor="@android:color/black"
-        android:textSize="40sp"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/classLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:textColor="@android:color/black"
+        android:text="@string/locationText"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/classNameInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteLocation"
+        android:id="@+id/locationInputView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Building Abbreviation"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/classLocation"
-        android:layout_alignStart="@+id/classNameInput"
+        android:layout_below="@+id/locationView"
+        android:layout_alignStart="@+id/courseInputView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:ems="10"
         android:imeOptions="actionDone"
-        android:layout_marginTop="15dp" />
+        android:hint="@string/locationHint"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black" />
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/confirmCourse"
+    <TextView
+        android:id="@+id/startTimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginRight="32dp"
-        android:clickable="true"
-        android:elevation="4dp"
-        app:backgroundTint="@color/colorAccent"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/fab_check"
-        />
+        android:layout_below="@+id/locationInputView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/startTimeText"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/startTimeInputView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/startTimeView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/startTimeHint"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="@android:color/black" />
 
     <!--Days of the week-->
 
     <TextView
-        android:id="@+id/wednesdayButton"
+        android:id="@+id/toggleWednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WED"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:background="@drawable/white_circle_drawable"
-        android:textSize="13sp"
-        android:layout_below="@id/startTimeDisplay"
+        android:layout_below="@id/startTimeInputView"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:onClick="selectDay"/>
+        android:gravity="center"
+        android:text="@string/wednesday"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:background="@drawable/white_circle_drawable"
+        android:onClick="toggleDay"/>
 
     <TextView
-        android:id="@+id/tuesdayButton"
+        android:id="@+id/toggleTuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TUE"
-        android:textStyle="bold"
+        android:layout_alignTop="@id/toggleWednesday"
+        android:layout_toStartOf="@id/toggleWednesday"
+        android:layout_marginEnd="10sp"
         android:gravity="center"
-        android:background="@drawable/white_circle_drawable"
+        android:text="@string/tuesday"
+        android:textStyle="bold"
         android:textSize="13sp"
-        android:layout_alignTop="@id/wednesdayButton"
-        android:layout_toLeftOf="@id/wednesdayButton"
-        android:layout_marginRight="10sp"
-        android:onClick="selectDay"/>
+        android:background="@drawable/white_circle_drawable"
+        android:onClick="toggleDay"/>
 
     <TextView
-        android:id="@+id/mondayButton"
+        android:id="@+id/toggleMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MON"
-        android:textStyle="bold"
+        android:layout_alignTop="@id/toggleTuesday"
+        android:layout_toStartOf="@id/toggleTuesday"
+        android:layout_marginEnd="10sp"
         android:gravity="center"
-        android:background="@drawable/white_circle_drawable"
+        android:text="@string/monday"
+        android:textStyle="bold"
         android:textSize="13sp"
-        android:layout_alignTop="@id/tuesdayButton"
-        android:layout_toLeftOf="@id/tuesdayButton"
-        android:layout_marginRight="10sp"
-        android:onClick="selectDay"/>
+        android:background="@drawable/white_circle_drawable"
+        android:onClick="toggleDay"/>
 
     <TextView
-        android:id="@+id/thursdayButton"
+        android:id="@+id/toggleThursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="THU"
-        android:textStyle="bold"
+        android:layout_alignTop="@id/toggleWednesday"
+        android:layout_toEndOf="@id/toggleWednesday"
+        android:layout_marginStart="10sp"
         android:gravity="center"
-        android:background="@drawable/white_circle_drawable"
+        android:text="@string/thursday"
+        android:textStyle="bold"
         android:textSize="13sp"
-        android:layout_alignTop="@id/wednesdayButton"
-        android:layout_toRightOf="@id/wednesdayButton"
-        android:layout_marginLeft="10sp"
-        android:onClick="selectDay"/>
+        android:background="@drawable/white_circle_drawable"
+        android:onClick="toggleDay"/>
 
     <TextView
-        android:id="@+id/fridayButton"
+        android:id="@+id/toggleFriday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FRI"
-        android:textStyle="bold"
+        android:layout_alignTop="@id/toggleThursday"
+        android:layout_toEndOf="@id/toggleThursday"
+        android:layout_marginStart="10sp"
         android:gravity="center"
-        android:background="@drawable/white_circle_drawable"
+        android:text="@string/friday"
+        android:textStyle="bold"
         android:textSize="13sp"
-        android:layout_alignTop="@id/thursdayButton"
-        android:layout_toRightOf="@id/thursdayButton"
-        android:layout_marginLeft="10sp"
-        android:onClick="selectDay"/>
+        android:background="@drawable/white_circle_drawable"
+        android:onClick="toggleDay"/>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/confirmCourseFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="32dp"
+        android:elevation="4dp"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/fab_check" />
 
 </RelativeLayout>
