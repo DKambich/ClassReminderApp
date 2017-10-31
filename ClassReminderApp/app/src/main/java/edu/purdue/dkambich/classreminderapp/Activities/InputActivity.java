@@ -20,7 +20,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -59,6 +58,7 @@ public class InputActivity extends AppCompatActivity {
         name = (AutoCompleteTextView) findViewById(R.id.courseInputView);
         name.setInputType(InputType.TYPE_CLASS_TEXT);
 
+        //Create an autocomplete for the name input
         ArrayAdapter<String> nameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.course_abbr_array));
         name.setAdapter(nameAdapter);
         name.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,6 +71,8 @@ public class InputActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Create a key listener to change keyboard types
         name.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -82,6 +84,8 @@ public class InputActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //Create a touch listener to change keyboard types
         name.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -95,8 +99,9 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        //Get location to add in buildings array and for later references
+
         location = (AutoCompleteTextView) findViewById(R.id.locationInputView);
+        //Create an autocomplete list
         ArrayAdapter<String> locAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.building_abbr_array));
         location.setAdapter(locAdapter);
         location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,8 +116,8 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        //Get start time to add on a TimePickerDialog and later references
         startTime = (TextView) findViewById(R.id.startTimeInputView);
+        //Add a click listener to allow time input
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -146,78 +151,24 @@ public class InputActivity extends AppCompatActivity {
         //Get input button and apply submit logic
         inputButton = (FloatingActionButton) findViewById(R.id.confirmCourseFAB);
         inputButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    /*if(!name.getText().toString().contains("-")) {
-                        String message = "Incorrect course name format";
-                        Toast toast =Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
+            @Override
+            public void onClick(View view) {
+                //Create a course and add it to the CourseList
+                int[] ID = {R.id.toggleMonday, R.id.toggleTuesday, R.id.toggleWednesday, R.id.toggleThursday, R.id.toggleFriday };
+                Course newCourse = new Course(name.getText().toString(), location.getText().toString(), startTime.getText().toString());
+                String days = "";
+                for(int viewID: ID){
+                    TextView day = (TextView) findViewById(viewID);
+                    if(day.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
+                        days += day.getText().toString();
                     }
+                }
+                newCourse.setDaysOfWeek(days);
 
-                    String abbr = name.getText().toString().substring(0, name.getText().toString().indexOf("-"));
-                    String[] courses = getResources().getStringArray(R.array.course_abbr_array);
-                    boolean error = true;
-                    for(String course: courses) {
-                        if(course.equals(abbr)) {
-                            error = false;
-                        }
-                    }
-                    if(error){
-                        String message = "Please enter a valid course ID abbreviation";
-                        Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
-                    }
-
-                    //Check for proper time
-                    if(startTime.getText().toString().equals("HH:MM")) {
-                        String message = "Please enter a valid start time";
-                        Toast toast =Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
-                    }
-
-                    //Check for proper location
-                    String[] buildings = getResources().getStringArray(R.array.building_abbr_array);
-                    error = true;
-                    for(String building: buildings){
-                        if(building.equals(location.getText().toString())){
-                            error = false;
-                        }
-                    }
-                    if(error){
-                        String message = "Please enter a valid location";
-                        Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
-                        toast.show();
-                        return;
-                    }*/
-                    //Create a course and add it to the CourseList
-                    int[] ID = {R.id.toggleMonday, R.id.toggleTuesday, R.id.toggleWednesday, R.id.toggleThursday, R.id.toggleFriday };
-                    Course newCourse = new Course(name.getText().toString(), location.getText().toString(), startTime.getText().toString());
-                    String days = "";
-                    for(int viewID: ID){
-                        TextView day = (TextView) findViewById(viewID);
-                        if(day.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
-                            days += day.getText().toString();
-                        }
-                    }
-                    newCourse.setDaysOfWeek(days);
-
-
-
-                    //
-
-                    String message = "Course added successfully";
-                    Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
-                    toast.show();
-
-
-                    Intent activity = new Intent();
-                    activity.putExtra("course", new Gson().toJson(newCourse));
-                    setResult(RESULT_OK, activity);
-                    finish();
+                Intent activity = new Intent();
+                activity.putExtra("course", new Gson().toJson(newCourse));
+                setResult(RESULT_OK, activity);
+                finish();
             }
         });
     }

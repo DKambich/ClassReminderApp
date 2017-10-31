@@ -52,7 +52,7 @@ public class CourseListActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
-        if(resultCode == 0){
+        if(resultCode == 0) {
             String jsonMyObject = "";
             Bundle extras = data.getExtras();
             if (extras != null) {
@@ -69,6 +69,9 @@ public class CourseListActivity extends AppCompatActivity {
                 realm.commitTransaction();
                 //Update the course list adapter
                 adapter.notifyDataSetChanged();
+                String message = "Course added successfully";
+                Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_SHORT);
+                toast.show();
             }
         }
         else if(resultCode == 1) {
