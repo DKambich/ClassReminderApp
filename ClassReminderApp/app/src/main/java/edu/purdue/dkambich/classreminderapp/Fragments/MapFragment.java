@@ -17,13 +17,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.GeoDataApi;
-import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.AutocompletePredictionBuffer;
+import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
+import com.google.android.gms.location.places.GeoDataClient;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,13 +33,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import edu.purdue.dkambich.classreminderapp.R;
 
@@ -56,6 +56,8 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
     //Google Maps and Services Variables
     private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
+    private GeoDataClient mGeoDataClient;
+    private Task<AutocompletePredictionBufferResponse> results;
 
     //User Information Variables
     private Location lastUserLocation;
@@ -84,10 +86,11 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
-                    .addApi(Places.GEO_DATA_API)
-                    .addApi(Places.PLACE_DETECTION_API)
                     .build();
-        }
+         }
+
+        mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
+
 
         //TESTING GEOCODER
         test = new Geocoder(getContext(), Locale.getDefault());
@@ -101,7 +104,7 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         //TESTING GEOCODER
 
         //TESTING PLACES API
-
+        
         //TESTING PLACES API
 
         //Check to see if we have location permission
@@ -242,6 +245,14 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         CameraPosition centerLocation = CameraPosition.builder().target(new LatLng(lastUserLocation.getLatitude(), lastUserLocation.getLongitude())).build();
         //Move the camera to the position
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(centerLocation));
+    }
+
+    public void testSearch(){
+        LatLngBounds bounds = new LatLngBounds(new LatLng(40.40905, -86.93604), new LatLng(40.43896, -86.90725));
+        AutocompleteFilter filter = new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_NONE).build();
+        results = mGeoDataClient.getAutocompletePredictions("HAAS", bounds, filter);
+
+        Toast.makeText(getActivity(), results.getResult().get(0).getPrimaryText(null).toString(), Toast.LENGTH_LONG);
     }
 
 

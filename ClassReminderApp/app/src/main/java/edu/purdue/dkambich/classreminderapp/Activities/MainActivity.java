@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.style.CharacterStyle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,9 +18,17 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
+import com.google.android.gms.location.places.AutocompletePredictionBuffer;
+import com.google.android.gms.location.places.AutocompletePredictionBufferResponse;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.PlacesOptions;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,37 +51,15 @@ public class MainActivity extends AppCompatActivity  {
         //Receive mapFragment
         map = (MapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragment);
 
+        //Create Google Client
+
         //Receive locationButton and add click listeners
         locationButton = (FloatingActionButton) findViewById(R.id.targetLocationFAB);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 map.centerLocation();
-                //TESTING GEOCODER
-                Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                try {
-                    List<Address> addresses = geocoder.getFromLocationName("Lawson Computer Science Building, West Lafayette", 1);
-                    Address obj = addresses.get(0);
-                    map.addMarker(new LatLng(obj.getLatitude(), obj.getLongitude()), obj.getFeatureName());
-                    String add = obj.getAddressLine(0);
-                    add = add + "\n" + obj.getCountryName();
-                    add = add + "\n" + obj.getCountryCode();
-                    add = add + "\n" + obj.getAdminArea();
-                    add = add + "\n" + obj.getPostalCode();
-                    add = add + "\n" + obj.getSubAdminArea();
-                    add = add + "\n" + obj.getLocality();
-                    add = add + "\n" + obj.getSubThoroughfare();
 
-                    System.out.println(add);
-                    Toast.makeText(getApplicationContext(), add, Toast.LENGTH_SHORT).show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                //TESTING GEOCODER
             }
         });
 
