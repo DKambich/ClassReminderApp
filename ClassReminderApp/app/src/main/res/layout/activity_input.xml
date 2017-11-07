@@ -45,49 +45,52 @@
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
-    <!--<AutoCompleteTextView-->
-        <!--android:id="@+id/locationInputView"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:ems="10"-->
-        <!--android:imeOptions="actionDone"-->
-        <!--android:hint="@string/locationHint"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:textColor="@android:color/black"-->
-        <!--android:layout_below="@+id/locationView"-->
-        <!--android:layout_alignStart="@+id/courseInputView" />-->
+        <TextView
+            android:id="@+id/locationString"
+            android:layout_width="180dp"
+            android:layout_height="@dimen/place_autocomplete_powered_by_google_height"
+            android:layout_alignStart="@id/courseInputView"
+            android:layout_below="@id/locationView"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:hint="@string/locationHint"
+            android:onClick="pickLocationList"
+            android:lines="1"
+            android:ellipsize="end"/>
 
-    <TextView
-        android:id="@+id/locationString"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No Location"
-        android:paddingEnd="10dp"
-        android:layout_below="@id/locationView"
-        android:layout_marginTop="15dp"
-        android:paddingTop="10dp"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true" />
 
-    <ImageButton
-        android:id="@+id/locationInputButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+    <RelativeLayout
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/locationView"
+        android:id="@+id/locationButtonWrapper"
+        android:layout_width="@dimen/place_autocomplete_powered_by_google_height"
+        android:layout_height="@dimen/place_autocomplete_powered_by_google_height"
         android:layout_toRightOf="@id/locationString"
-        android:onClick="pickLocation"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_add_location"
-        />
+        android:layout_below="@+id/locationView"
+        android:background="@drawable/gold_circle_drawable">
+
+        <ImageButton
+            android:id="@+id/locationInputButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_location"
+            android:scaleType="fitCenter"
+            android:scaleX=".8"
+            android:scaleY=".8"
+            android:onClick="pickLocation"
+            android:background="@drawable/button_background"
+
+            style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+
+    </RelativeLayout>
+
 
 
 <TextView
     android:id="@+id/startTimeView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/locationInputButton"
+    android:layout_below="@+id/locationButtonWrapper"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="20dp"
     android:text="@string/startTimeText"
@@ -189,6 +192,7 @@
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="32dp"
         android:elevation="4dp"
+        android:onClick="confirmCourse"
         app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
         app:srcCompat="@drawable/fab_check" />

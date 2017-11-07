@@ -14,7 +14,8 @@
     <!--Input Screen Strings-->
     <string name="courseHint">ID-#####</string>
     <string name="courseText">Course Name</string>
-    <string name="locationHint">Building Abbreviation</string>
+    <string name="locationHint">No Location</string>
+    <string name="customLocationText">Custom Location</string>
     <string name="locationText">Location</string>
     <string name="startTimeHint">HH:MM</string>
     <string name="startTimeText">Start Time</string>

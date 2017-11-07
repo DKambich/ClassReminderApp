@@ -18,12 +18,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.RelativeLayout;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.Gson;
 
@@ -35,14 +37,14 @@ import edu.purdue.dkambich.classreminderapp.R;
 public class InputActivity extends AppCompatActivity {
 
     //View Variables
-    private AutoCompleteTextView name;//, location;
+    private AutoCompleteTextView name;
     private FloatingActionButton inputButton;
     private RelativeLayout inputLayout;
     private TextView startTime;
 
     //Realm Variables
-    private final int RESULT_OK = 0, RESULT_RETURN = 1;
-    private final int PLACE_PICKER_REQUEST = 1;
+    private final int REALM_RESULT_OK = 0, REALM_RESULT_RETURN = 1;
+    private final int PLACE_PICKER_REQUEST = 1, PLACE_AUTOCOMPLETE_REQUEST = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,22 +107,6 @@ public class InputActivity extends AppCompatActivity {
         });
 
 
-//        location = (AutoCompleteTextView) findViewById(R.id.locationInputView);
-//        //Create an autocomplete list
-//        ArrayAdapter<String> locAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.building_abbr_array));
-//        location.setAdapter(locAdapter);
-//        location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                View newView = getCurrentFocus();
-//                if (newView != null) {
-//                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                    imm.hideSoftInputFromWindow(newView.getWindowToken(), 0);
-//                }
-//
-//            }
-//        });
-
         startTime = (TextView) findViewById(R.id.startTimeInputView);
         //Add a click listener to allow time input
         startTime.setOnClickListener(new View.OnClickListener() {
@@ -153,34 +139,10 @@ public class InputActivity extends AppCompatActivity {
             }
         });
 
-        //Get input button and apply submit logic
-        inputButton = (FloatingActionButton) findViewById(R.id.confirmCourseFAB);
-        inputButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Create a course and add it to the CourseList
-                TextView locationString = (TextView) findViewById(R.id.locationString);
-                int[] ID = {R.id.toggleMonday, R.id.toggleTuesday, R.id.toggleWednesday, R.id.toggleThursday, R.id.toggleFriday };
-                Course newCourse = new Course(name.getText().toString(), locationString.getText().toString(), startTime.getText().toString());
-                String days = "";
-                for(int viewID: ID){
-                    TextView day = (TextView) findViewById(viewID);
-                    if(day.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
-                        days += day.getText().toString();
-                    }
-                }
-                newCourse.setDaysOfWeek(days);
-
-                Intent activity = new Intent();
-                activity.putExtra("course", new Gson().toJson(newCourse));
-                setResult(RESULT_OK, activity);
-                finish();
-            }
-        });
     }
 
-    public void toggleDay(View v){
-        TextView clickable = (TextView) v;
+    public void toggleDay(View view){
+        TextView clickable = (TextView) view;
         if(clickable.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
             clickable.setBackground(getDrawable(R.drawable.white_circle_drawable));
             clickable.setTextColor(ContextCompat.getColor(getBaseContext(), R.color.textColorSecondary));
@@ -191,11 +153,31 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
+    public void confirmCourse(View view) {
+        //Create a course and add it to the CourseList
+        TextView locationString = (TextView) findViewById(R.id.locationString);
+        int[] ID = {R.id.toggleMonday, R.id.toggleTuesday, R.id.toggleWednesday, R.id.toggleThursday, R.id.toggleFriday };
+        Course newCourse = new Course(name.getText().toString(), locationString.getText().toString(), startTime.getText().toString());
+        String days = "";
+        for(int viewID: ID){
+            TextView day = (TextView) findViewById(viewID);
+            if(day.getBackground().getConstantState().equals(getDrawable(R.drawable.gold_circle_drawable).getConstantState())){
+                days += day.getText().toString();
+            }
+        }
+        newCourse.setDaysOfWeek(days);
+
+        Intent activity = new Intent();
+        activity.putExtra("course", new Gson().toJson(newCourse));
+        setResult(REALM_RESULT_OK, activity);
+        finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                setResult(RESULT_RETURN);
+                setResult(REALM_RESULT_RETURN);
                 finish();
                 break;
         }
@@ -204,7 +186,7 @@ public class InputActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        setResult(RESULT_RETURN);
+        setResult(REALM_RESULT_RETURN);
         finish();
         super.onBackPressed();
     }
@@ -212,20 +194,51 @@ public class InputActivity extends AppCompatActivity {
     public void pickLocation(View view) {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+            startActivityForResult(builder.build(this), PLACE_AUTOCOMPLETE_REQUEST);
         }
-        catch (Exception e) {
+        catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        }
+        catch (GooglePlayServicesNotAvailableException e) {
             e.printStackTrace();
         }
     }
 
+    public void pickLocationList(View view) {
+        PlaceAutocomplete.IntentBuilder builder = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY);
+        try {
+            startActivityForResult(builder.build(this), PLACE_AUTOCOMPLETE_REQUEST);
+        }
+        catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        }
+        catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
-                Place place = PlacePicker.getPlace(this, data);
-                String toastMsg = String.format("Place: %s", place.getName());
+            if(resultCode == RESULT_OK) {
                 TextView locationString = (TextView) findViewById(R.id.locationString);
-                locationString.setText(place.getName());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+                Place place = PlacePicker.getPlace(this, data);
+                if(place.getName().toString().contains("\"")) {
+                    locationString.setText(R.string.customLocationText);
+                }
+                else {
+                    locationString.setText(place.getName());
+                }
+            }
+        }
+        else if (requestCode == PLACE_AUTOCOMPLETE_REQUEST) {
+            if(data != null) {
+                if(resultCode == RESULT_OK) {
+                    Place place = PlaceAutocomplete.getPlace(this, data);
+                    TextView locationString = (TextView) findViewById(R.id.locationString);
+                    locationString.setText(place.getName());
+                }
+            }
         }
     }
 }
