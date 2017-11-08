@@ -2,13 +2,9 @@ package edu.purdue.dkambich.classreminderapp.Models;
 
 import io.realm.RealmObject;
 
-/**
- * Created by Daniel on 9/26/2017.
- */
-
 public class Course extends RealmObject {
 
-    private String name, location, startTime, daysOfWeek;
+    private String name, location, startTime, daysOfWeek, latitude, longitude;
 
     public Course(){
         this.name = "";
@@ -23,6 +19,8 @@ public class Course extends RealmObject {
         this.startTime = startTime;
     }
 
+    //Name Methods
+
     public String getName() {
         return name;
     }
@@ -30,6 +28,8 @@ public class Course extends RealmObject {
     public void setName(String name) {
         this.name = name;
     }
+
+    //Location Methods
 
     public String getLocation() {
         return location;
@@ -39,6 +39,8 @@ public class Course extends RealmObject {
         this.location = location;
     }
 
+    //Time Methods
+
     public String getStartTime() {
         return startTime;
     }
@@ -46,6 +48,16 @@ public class Course extends RealmObject {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
+
+    public int getStartHour() {
+        return Integer.parseInt(startTime.substring(0, startTime.indexOf(":"))) + (startTime.contains("PM") ? 12 : 0);
+    }
+
+    public int getStartMinute(){
+        return Integer.parseInt(startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" ")));
+    }
+
+    //Day Methods
 
     public String getDaysOfWeek(){
         return daysOfWeek;
@@ -55,12 +67,20 @@ public class Course extends RealmObject {
         this.daysOfWeek = daysOfWeek;
     }
 
-    public int getStartHour(){
-        return Integer.parseInt(startTime.substring(0, startTime.indexOf(":"))) + (startTime.contains("PM") ? 12 : 0);
+    //LatLng Methods
+
+    public String getLatitude() {
+        return latitude;
     }
 
-    public int getStartMinute(){
-        return Integer.parseInt(startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" ")));
+    public String getLongitude() {
+        return longitude;
     }
+
+    public void setLatLng(String latitude, String longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
 
 }

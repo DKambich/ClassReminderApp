@@ -56,8 +56,6 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
     //Google Maps and Services Variables
     private GoogleMap mGoogleMap;
     private GoogleApiClient mGoogleApiClient;
-    private GeoDataClient mGeoDataClient;
-    private Task<AutocompletePredictionBufferResponse> results;
 
     //User Information Variables
     private Location lastUserLocation;
@@ -87,40 +85,21 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
-         }
-
-        mGeoDataClient = Places.getGeoDataClient(getActivity(), null);
-
-
-        //TESTING GEOCODER
-        test = new Geocoder(getContext(), Locale.getDefault());
-        try {
-            List<Address> location = test.getFromLocationName("HAAS Hall", 5);
-            System.out.println(location.get(0).getLatitude() + ", " + location.get(0).getLongitude());
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        //TESTING GEOCODER
-
-        //TESTING PLACES API
-        
-        //TESTING PLACES API
 
         //Check to see if we have location permission
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Should we show an explanation?
             //if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+            // Show an explanation to the user *asynchronously* -- don't block
+            // this thread waiting for the user's response! After the user
+            // sees the explanation, try again to request the permission.
 
             //} else {
-                // No explanation needed, we can request the permission.
-            ActivityCompat.requestPermissions(getActivity(), new String[]{ Manifest.permission.ACCESS_FINE_LOCATION }, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-        }
-        else {
+            // No explanation needed, we can request the permission.
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+        } else {
             //Permission is already granted so connect our mapclient
             mGoogleApiClient.connect();
         }
@@ -131,7 +110,7 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mapView = (MapView) mView.findViewById(R.id.map);
-        if(mapView != null){
+        if (mapView != null) {
             mapView.onCreate(null);
             mapView.onResume();
             mapView.getMapAsync(this);
@@ -147,8 +126,7 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Enable the map user location
                     mGoogleApiClient.connect();
-                }
-                else { //Permission was denied so functionality breaks down
+                } else { //Permission was denied so functionality breaks down
                     Toast.makeText(getContext(), "Error Retrieving Location", Toast.LENGTH_LONG);
                 }
                 break;
@@ -231,7 +209,7 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         mGoogleMap.addMarker(new MarkerOptions().position(newLatLng).title(locationName));
     }
 
-    public void centerLocation(){
+    public void centerLocation() {
         //Save the current zoom location
         float currentZoom = mGoogleMap.getCameraPosition().zoom;
         //Create a camera position at the user location
@@ -240,22 +218,11 @@ public class MapFragment extends android.support.v4.app.Fragment implements OnMa
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(centerLocation));
     }
 
-    public void resetView(){
+    public void resetView() {
         //Create a reset camera position at the user location
         CameraPosition centerLocation = CameraPosition.builder().target(new LatLng(lastUserLocation.getLatitude(), lastUserLocation.getLongitude())).build();
         //Move the camera to the position
         mGoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(centerLocation));
     }
-
-    public void testSearch(){
-        LatLngBounds bounds = new LatLngBounds(new LatLng(40.40905, -86.93604), new LatLng(40.43896, -86.90725));
-        AutocompleteFilter filter = new AutocompleteFilter.Builder().setTypeFilter(AutocompleteFilter.TYPE_FILTER_NONE).build();
-        results = mGeoDataClient.getAutocompletePredictions("HAAS", bounds, filter);
-
-        Toast.makeText(getActivity(), results.getResult().get(0).getPrimaryText(null).toString(), Toast.LENGTH_LONG);
-    }
-
-
-
 
 }

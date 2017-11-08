@@ -4,69 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/inputLayout"
+    android:onClick="closeKeyboard"
     tools:context="edu.purdue.dkambich.classreminderapp.Activities.InputActivity">
 
+    <!--Course-->
+
     <TextView
-        android:id="@+id/courseView"
+        android:id="@+id/courseNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="25dp"
         android:text="@string/courseText"
-        android:textAlignment="center"
         android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
 
     <AutoCompleteTextView
         android:id="@+id/courseInputView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/courseView"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/courseNameView"
         android:layout_marginTop="15dp"
-        android:ems="10"
-        android:imeOptions="actionDone"
+        android:textColor="@android:color/black"
         android:hint="@string/courseText"
         android:inputType="textPersonName"
-        android:textColor="@android:color/black" />
+        android:ems="10"
+        android:imeOptions="actionDone" />
+
+    <!--Location-->
 
     <TextView
-        android:id="@+id/locationView"
+        android:id="@+id/locationNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/courseInputView"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/courseInputView"
         android:layout_marginTop="20dp"
         android:text="@string/locationText"
         android:textSize="30sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/locationString"
-            android:layout_width="180dp"
-            android:layout_height="@dimen/place_autocomplete_powered_by_google_height"
-            android:layout_alignStart="@id/courseInputView"
-            android:layout_below="@id/locationView"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:hint="@string/locationHint"
-            android:onClick="pickLocationList"
-            android:lines="1"
-            android:ellipsize="end"/>
-
+    <TextView
+        android:id="@+id/locationInputView"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/place_autocomplete_powered_by_google_height"
+        android:layout_alignStart="@id/courseInputView"
+        android:layout_below="@id/locationNameView"
+        android:layout_marginTop="15dp"
+        android:hint="@string/locationHint"
+        android:gravity="center_vertical"
+        android:textSize="20sp"
+        android:lines="1"
+        android:ellipsize="end"
+        android:onClick="showLocationAutoComplete"/>
 
     <RelativeLayout
-        android:layout_marginTop="15dp"
-        android:id="@+id/locationButtonWrapper"
         android:layout_width="@dimen/place_autocomplete_powered_by_google_height"
         android:layout_height="@dimen/place_autocomplete_powered_by_google_height"
-        android:layout_toRightOf="@id/locationString"
-        android:layout_below="@+id/locationView"
+        android:layout_toRightOf="@id/locationInputView"
+        android:layout_alignTop="@id/locationInputView"
         android:background="@drawable/gold_circle_drawable">
 
         <ImageButton
@@ -75,126 +75,128 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_location"
             android:scaleType="fitCenter"
-            android:scaleX=".8"
-            android:scaleY=".8"
-            android:onClick="pickLocation"
+            android:scaleX=".6"
+            android:scaleY=".6"
             android:background="@drawable/button_background"
-
+            android:onClick="showLocationPlacePicker"
             style="@style/Widget.AppCompat.Button.Borderless.Colored" />
 
     </RelativeLayout>
 
+    <!--Start Time-->
 
+    <TextView
+        android:id="@+id/startTimeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/locationInputView"
+        android:layout_marginTop="20dp"
+        android:text="@string/startTimeText"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black" />
 
-<TextView
-    android:id="@+id/startTimeView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/locationButtonWrapper"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="20dp"
-    android:text="@string/startTimeText"
-    android:textAlignment="center"
-    android:textSize="30sp"
-    android:textColor="@android:color/black"
-    android:textStyle="bold" />
+    <TextView
+        android:id="@+id/startTimeInputView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/startTimeView"
+        android:layout_marginTop="15dp"
+        android:onClick="showTimeDialog"
+        android:text="@string/startTimeHint"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="@android:color/black" />
 
-<TextView
-    android:id="@+id/startTimeInputView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/startTimeView"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="15dp"
-    android:text="@string/startTimeHint"
-    android:textAlignment="center"
-    android:textSize="40sp"
-    android:textColor="@android:color/black" />
-
-<!--Days of the week-->
+    <!--Days of the week-->
 
     <TextView
         android:id="@+id/toggleWednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/startTimeInputView"
-        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
+        android:layout_below="@id/startTimeInputView"
+        android:layout_marginTop="10dp"
+        android:onClick="toggleDay"
         android:text="@string/wednesday"
-        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
-        android:background="@drawable/white_circle_drawable"
-        android:onClick="toggleDay"/>
+        android:textStyle="bold"
+        android:background="@drawable/white_circle_drawable" />
 
     <TextView
         android:id="@+id/toggleTuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toggleWednesday"
         android:layout_toStartOf="@id/toggleWednesday"
+        android:layout_alignTop="@id/toggleWednesday"
         android:layout_marginEnd="10sp"
-        android:gravity="center"
+        android:onClick="toggleDay"
         android:text="@string/tuesday"
-        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
-        android:background="@drawable/white_circle_drawable"
-        android:onClick="toggleDay"/>
+        android:textStyle="bold"
+        android:background="@drawable/white_circle_drawable" />
 
     <TextView
         android:id="@+id/toggleMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toggleTuesday"
         android:layout_toStartOf="@id/toggleTuesday"
+        android:layout_alignTop="@id/toggleTuesday"
         android:layout_marginEnd="10sp"
-        android:gravity="center"
+        android:onClick="toggleDay"
         android:text="@string/monday"
-        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
-        android:background="@drawable/white_circle_drawable"
-        android:onClick="toggleDay"/>
+        android:textStyle="bold"
+        android:background="@drawable/white_circle_drawable" />
 
     <TextView
         android:id="@+id/toggleThursday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toggleWednesday"
         android:layout_toEndOf="@id/toggleWednesday"
+        android:layout_alignTop="@id/toggleWednesday"
         android:layout_marginStart="10sp"
-        android:gravity="center"
+        android:onClick="toggleDay"
         android:text="@string/thursday"
-        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
-        android:background="@drawable/white_circle_drawable"
-        android:onClick="toggleDay"/>
+        android:textStyle="bold"
+        android:background="@drawable/white_circle_drawable" />
 
     <TextView
         android:id="@+id/toggleFriday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/toggleThursday"
         android:layout_toEndOf="@id/toggleThursday"
+        android:layout_alignTop="@id/toggleThursday"
         android:layout_marginStart="10sp"
-        android:gravity="center"
+        android:onClick="toggleDay"
         android:text="@string/friday"
-        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
-        android:background="@drawable/white_circle_drawable"
-        android:onClick="toggleDay"/>
+        android:textStyle="bold"
+        android:background="@drawable/white_circle_drawable" />
+
+    <!--Confirm Course-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/confirmCourseFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="32dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="32dp"
-        android:elevation="4dp"
+        android:layout_marginBottom="32dp"
         android:onClick="confirmCourse"
-        app:backgroundTint="@color/colorAccent"
         app:fabSize="normal"
-        app:srcCompat="@drawable/fab_check" />
+        android:elevation="4dp"
+        app:srcCompat="@drawable/fab_check"
+        app:backgroundTint="@color/colorAccent" />
 
 </RelativeLayout>

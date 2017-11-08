@@ -2,11 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="25sp"
     android:paddingTop="25sp">
 
-    <!--Name of the class-->
+    <!--Name-->
 
     <TextView
         android:id="@+id/rowCourseView"
@@ -19,61 +18,61 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
-    <!--Location of the class-->
+    <!--Location-->
 
     <TextView
         android:id="@+id/rowLocationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rowStartTimeView"
         android:layout_alignParentEnd="true"
+        android:layout_above="@+id/rowStartTimeView"
         android:paddingEnd="30dp"
         android:text="@string/dummyTextView"
         android:textSize="20sp" />
 
-    <!--Start time of the class-->
+    <!--Time-->
 
     <TextView
         android:id="@+id/rowStartTimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/rowCourseView"
         android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/rowCourseView"
         android:paddingEnd="30dp"
         android:text="@string/dummyTextView"
         android:textSize="20sp" />
 
-    <!--Days of the week-->
+    <!--Days-->
 
     <TextView
         android:id="@+id/rowWednesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rowCourseView"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rowCourseView"
         android:layout_marginTop="12dp"
-        android:gravity="center"
-        android:text="@string/wednesday" />
+        android:text="@string/wednesday"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/rowTuesday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/rowWednesday"
         android:layout_toStartOf="@id/rowWednesday"
+        android:layout_alignBottom="@id/rowWednesday"
         android:layout_marginEnd="10sp"
-        android:gravity="center"
-        android:text="@string/tuesday" />
+        android:text="@string/tuesday"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/rowMonday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/rowWednesday"
         android:layout_toStartOf="@id/rowTuesday"
+        android:layout_alignBottom="@id/rowWednesday"
         android:layout_marginEnd="10sp"
-        android:gravity="center"
-        android:text="@string/monday" />
+        android:text="@string/monday"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/rowThursday"
@@ -89,8 +88,8 @@
         android:id="@+id/rowFriday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/rowWednesday"
         android:layout_toEndOf="@id/rowThursday"
+        android:layout_alignBottom="@id/rowWednesday"
         android:layout_marginStart="10sp"
         android:gravity="center"
         android:text="@string/friday" />
