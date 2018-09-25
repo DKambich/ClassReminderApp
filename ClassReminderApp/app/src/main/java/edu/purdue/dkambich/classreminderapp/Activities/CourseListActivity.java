@@ -1,10 +1,12 @@
 package edu.purdue.dkambich.classreminderapp.Activities;
 
 import android.app.AlarmManager;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -22,6 +25,7 @@ import edu.purdue.dkambich.classreminderapp.Models.Alarm;
 import edu.purdue.dkambich.classreminderapp.Models.Course;
 import edu.purdue.dkambich.classreminderapp.R;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class CourseListActivity extends AppCompatActivity {
 
@@ -65,27 +69,75 @@ public class CourseListActivity extends AppCompatActivity {
         startActivityForResult(myIntent, COURSE_INPUT_REQUEST);
     }
 
-    //TODO: Put course info into intent for class reminder
-    public void setCourseAlarm(Course course) {
+    public void scheduleAlarm(Course course, int day) {
         //Receive an instance of calendar
         Calendar calendar = Calendar.getInstance();
-        //Set the second of the calendar to default at 0
-        calendar.setTimeInMillis(0);
-        //Set the hour of the calendar as the course's start minute
+
+        System.out.println(course.isMorningClass());
+        if(course.isMorningClass()) {
+            calendar.set(Calendar.AM_PM, Calendar.AM);
+        }
+        else {
+            calendar.set(Calendar.AM_PM, Calendar.PM);
+        }
+
+        //Set the second of the calendar to the start of the minute
+        calendar.set(Calendar.SECOND, 0);
+
+        //Set the minute of the calendar as the course's start minute
         calendar.set(Calendar.MINUTE, course.getStartMinute());
+
         //Set the hour of the calendar as the course's start hour
+        System.out.println("Course Hour: " + course.getStartHour());
         calendar.set(Calendar.HOUR_OF_DAY, course.getStartHour());
+
+        //Set the day of the week of the calendar
+        calendar.set(Calendar.DAY_OF_WEEK, day);
+
+        System.out.println(calendar.getTime());
 
         //Get the alarm manager from the system
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
         //Create an intent to use the Alarm Class
         Intent myIntent = new Intent(this, Alarm.class);
-        //Create a pending intent
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0 , myIntent, 0);
-        //Set a alarm using the pending intent
-        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        myIntent.putExtra("alarmCourse", new Gson().toJson(course));
 
-        //manager.set(AlarmManager.RTC_WAKEUP, SystemClock.elapsedRealtime()+3000, pendingIntent);
+        //Create a pending intent
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0 , myIntent, PendingIntent.FLAG_ONE_SHOT);
+
+        manager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+    }
+
+    //TODO: Put course info into intent for class reminder, use JSON implementation
+    public void setCourseAlarm(Course course) {
+        if(course.getDaysOfWeek().contains("MON")) {
+            System.out.println("MON");
+            scheduleAlarm(course, Calendar.MONDAY);
+        }
+        if(course.getDaysOfWeek().contains("TUE")) {
+            System.out.println("TUE");
+            scheduleAlarm(course, Calendar.TUESDAY);
+        }
+        if(course.getDaysOfWeek().contains("WED")) {
+            System.out.println("WED");
+            scheduleAlarm(course, Calendar.WEDNESDAY);
+        }
+        if(course.getDaysOfWeek().contains("THU")) {
+            System.out.println("THU");
+            scheduleAlarm(course, Calendar.THURSDAY);
+        }
+        if(course.getDaysOfWeek().contains("FRI")) {
+            System.out.println("FRI");
+            scheduleAlarm(course, Calendar.FRIDAY);
+        }
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setContentTitle(course.getName())
+                .setSmallIcon(R.drawable.gold_circle_drawable)
+                .setContentText(String.format("You have %s at %s", course.getName(), course.getStartTime()));
+        NotificationManager mNotifyMgr = (NotificationManager) getApplicationContext().getSystemService(getApplication().NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(001, mBuilder.build());
+
     }
 
     //Navigation Methods

@@ -1,19 +1,22 @@
 package edu.purdue.dkambich.classreminderapp.Activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import edu.purdue.dkambich.classreminderapp.Fragments.MapFragment;
-import edu.purdue.dkambich.classreminderapp.Models.Alarm;
 import edu.purdue.dkambich.classreminderapp.R;
 
 public class MainActivity extends AppCompatActivity  {
@@ -48,7 +51,23 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+    }
 
+    public void callGoogleMaps(Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyB9ztx38wbvEh32NAykUBmCrZNNpfy8iGk";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.err.println(error.getMessage());
+            }
+        });
+        queue.add(stringRequest);
     }
 
     //Navigation Methods

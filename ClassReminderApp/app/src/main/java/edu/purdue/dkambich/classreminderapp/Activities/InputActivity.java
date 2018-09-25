@@ -138,9 +138,11 @@ public class InputActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                 String timeOfDay = " AM";
                 //If the hour is in the second half of the day, readjust the hour to  work for the afternoon
-                if(selectedHour > 12) {
+                if(selectedHour > 11) {
                     timeOfDay = " PM";
-                    selectedHour -= 12;
+                    if(selectedHour > 12) {
+                        selectedHour -= 12;
+                    }
                 }
                 //Properly build the minute part of the string if there are less than 10 minutes
                 String chosenTime = selectedHour + ":";

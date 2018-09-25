@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ClassReminderApp</string>
+    <string name="app_name">Clap</string>
 
     <!--Dummy Strings-->
     <string name="dummyTextView">TextView</string>

@@ -50,11 +50,23 @@ public class Course extends RealmObject {
     }
 
     public int getStartHour() {
-        return Integer.parseInt(startTime.substring(0, startTime.indexOf(":"))) + (startTime.contains("PM") ? 12 : 0);
+        int hour = Integer.parseInt(startTime.substring(0, startTime.indexOf(":")));
+        //if(hour == 12 && startTime.contains("AM")) {
+        //    hour = 0;
+        //}
+        //else if(hour != 12 && startTime.contains("PM")) {
+        //    hour += 12;
+        //}
+
+        return hour;
     }
 
     public int getStartMinute(){
         return Integer.parseInt(startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" ")));
+    }
+
+    public boolean isMorningClass(){
+        return startTime.contains("AM");
     }
 
     //Day Methods

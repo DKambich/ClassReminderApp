@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <receiver android:name=".Models.Alarm"/>
+        <receiver android:name="edu.purdue.dkambich.classreminderapp.Models.Alarm"/>
 
-        <activity android:name=".Activities.MainActivity" android:label="Map">
+        <activity android:name=".Activities.MainActivity" android:label="Clap">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
